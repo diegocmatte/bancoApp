@@ -60,6 +60,7 @@ public class BancoApp {
     }
     
     public static void atenderCliente(){
+        //teste de commit/push
     }
     
     /**
