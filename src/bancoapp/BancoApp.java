@@ -21,45 +21,47 @@ public class BancoApp {
     //private static ArrayList listaClientePrioritario = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
     private static int tempo = 0;
-    
+
     /**
      * método que adiciona um novo cliente na fila conforme a idade acrescido do tempo
      */
-    public static void addClienteFila(){
+    public static void addClienteFila() {
         String nome;
         int idade;
         System.out.print("Nome: ");
         nome = sc.next();
         System.out.print("Idade: ");
         idade = sc.nextInt();
-        System.out.print("---------\n");
+        System.out.print("--- Cliente adicionado ---\n");
         tempo++;
-        
+
         listaCliente.add(new Cliente(idade, nome, tempo));
-        
-      /*  
+
+        /*  
         if(idade>=65){
             listaClientePrioritario.add(new Cliente(idade, nome, tempo));
         } else {
             listaClienteNormal.add(new Cliente(idade, nome, tempo));
         }
-        */
-        
+         */
     }
-    
+
     /**
      * método que exibe todos os clientes existentes na fila
      */
-    public static void exibeClientes(){
-        System.out.print("---------\n");
+    public static void exibeClientes() {
+        System.out.print("--- Inicio da listagem ---\n");
         for (Cliente cliente : listaCliente) {
-            if(cliente.getIdade()>=65){
-                System.out.println("Cliente prioritario: "+cliente.toString());
+            if (cliente.getIdade() >= 65) {
+                System.out.println("Cliente prioritario: " + cliente.toString());
             } else {
-                System.out.println("Cliente nao prioritario: "+cliente.toString());
-                
+                System.out.println("Cliente nao prioritario: " + cliente.toString());
+
             }
         }
+        System.out.println("--- Fim da listagem ---\n");
+
+
         /*
         System.out.println("Clientes prioritários: ");
         for (int i = 0; i < listaClientePrioritario.size(); i++) {
@@ -69,15 +71,15 @@ public class BancoApp {
         for (int i = 0; i < listaCliente.size(); i++) {
             System.out.println(listaCliente.get(i).toString());
         }
-        */
-        System.out.print("----------\n");
+         */
     }
+
     /**
      * método que realiza o atendimento dos clientes e remove da fila depois de atender
      */
-    public static void atenderCliente(){
+    public static void atenderCliente() {
         for (Cliente c : listaCliente) {
-            if(c.getIdade()>=65){
+            if (c.getIdade() >= 65) {
                 System.out.println("Cliente prioritario atendido.");
                 listaCliente.remove(c);
             } else {
@@ -86,22 +88,24 @@ public class BancoApp {
             }
         }
     }
-    
+
     /**
      * método main que exibe um menu e demais ações do sistema
-     * @param args 
+     *
+     * @param args
      */
     public static void main(String[] args) {
         // TODO code application logic here
         int opcao = 0;
-        do{
+        do {
             System.out.println("1 - Adicionar cliente na fila");
             System.out.println("9 - Listar clientes");
             System.out.println("0 - Sair");
+            System.out.println("---------");
             System.out.print("Digite a sua opção: ");
             opcao = sc.nextInt();
-            System.out.print("---------\n");
-            switch(opcao){
+            System.out.print("---------\n\n");
+            switch (opcao) {
                 case 1:
                     addClienteFila();
                     break;
@@ -109,13 +113,14 @@ public class BancoApp {
                     exibeClientes();
                     break;
                 case 0:
+                    System.out.println("--- Fim da execução ---\n");
                     System.exit(opcao);
                     break;
                 default:
                     System.out.println("Opção inválida.");
                     break;
             }
-        }while (opcao != 0);
+        } while (opcao != 0);
     }
-    
+
 }
