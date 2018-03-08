@@ -17,8 +17,8 @@ public class BancoApp {
     /**
      * @param args the command line arguments
      */
-    private static ArrayList listaClienteNormal = new ArrayList<>();
-    private static ArrayList listaClientePrioritario = new ArrayList<>();
+    private static ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
+    //private static ArrayList listaClientePrioritario = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
     private static int tempo = 0;
     
@@ -35,31 +35,56 @@ public class BancoApp {
         System.out.print("---------\n");
         tempo++;
         
+        listaCliente.add(new Cliente(idade, nome, tempo));
+        
+      /*  
         if(idade>=65){
             listaClientePrioritario.add(new Cliente(idade, nome, tempo));
         } else {
             listaClienteNormal.add(new Cliente(idade, nome, tempo));
         }
+        */
         
     }
     
     /**
-     * método que exibe todos os clientes existentes em ambas filas
+     * método que exibe todos os clientes existentes na fila
      */
     public static void exibeClientes(){
         System.out.print("---------\n");
+        for (Cliente cliente : listaCliente) {
+            if(cliente.getIdade()>=65){
+                System.out.println("Cliente prioritario: "+cliente.toString());
+            } else {
+                System.out.println("Cliente nao prioritario: "+cliente.toString());
+                
+            }
+        }
+        /*
         System.out.println("Clientes prioritários: ");
         for (int i = 0; i < listaClientePrioritario.size(); i++) {
             System.out.println(listaClientePrioritario.get(i).toString());
         }
         System.out.println("Clientes não prioritários: ");
-        for (int i = 0; i < listaClienteNormal.size(); i++) {
-            System.out.println(listaClienteNormal.get(i).toString());
+        for (int i = 0; i < listaCliente.size(); i++) {
+            System.out.println(listaCliente.get(i).toString());
         }
+        */
         System.out.print("----------\n");
     }
-    
+    /**
+     * método que realiza o atendimento dos clientes
+     */
     public static void atenderCliente(){
+        for (Cliente c : listaCliente) {
+            if(c.getIdade()>=65){
+                System.out.println("Cliente prioritario atendido.");
+                listaCliente.remove(c);
+            } else {
+                System.out.println("Cliente nao prioritario atendido.");
+                listaCliente.remove(c);
+            }
+        }
     }
     
     /**
