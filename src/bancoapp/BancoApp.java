@@ -73,7 +73,7 @@ public class BancoApp {
         System.out.print("----------\n");
     }
     /**
-     * método que realiza o atendimento dos clientes
+     * método que realiza o atendimento dos clientes e remove da fila depois de atender
      */
     public static void atenderCliente(){
         for (Cliente c : listaCliente) {
