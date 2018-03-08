@@ -53,8 +53,8 @@ public class BancoApp {
 
                 }
             }
+            System.out.println("--- Fim da listagem ---\n");
         }
-        System.out.println("--- Fim da listagem ---\n");
 
     }
 
