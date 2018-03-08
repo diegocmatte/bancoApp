@@ -30,6 +30,10 @@ public class Cliente {
         return tempo;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     @Override
     public String toString() {
         return "Cliente{" + "idade=" + idade + ", nome=" + nome + ", tempo=" + tempo +"}";
