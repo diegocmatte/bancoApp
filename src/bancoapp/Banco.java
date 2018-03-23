@@ -31,6 +31,8 @@ public class Banco {
                     return;
                 }
             }
+        } else {
+            throw new IndexOutOfBoundsException("Não há ninguém na fila");
         }
         listaCliente.remove(0);
     }
