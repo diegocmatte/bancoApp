@@ -17,78 +17,7 @@ public class BancoApp {
     /**
      * @param args the command line arguments
      */
-    private static ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
-    private static Scanner sc = new Scanner(System.in);
     private static int tempo = 0;
-
-    /**
-     * Método que adiciona um novo cliente na fila conforme a idade acrescido do tempo
-     */
-    public static void adicionarClienteFila() {
-        String nome;
-        int idade;
-        System.out.print("Nome: ");
-        nome = sc.next();
-        System.out.print("Idade: ");
-        idade = sc.nextInt();
-        System.out.println("--- Cliente adicionado ---\n");
-        tempo++;
-
-        listaCliente.add(new Cliente(idade, nome, tempo));
-    }
-
-    /**
-     * Método que exibe todos os clientes existentes na fila ou devolve uma mensagem caso não exista cliente na fila
-     */
-    public static void exibirClientes() {
-        if (listaCliente.isEmpty()) {
-            System.out.println("--- Não há clientes na fila ---\n");
-        } else {
-            System.out.print("--- Inicio da listagem ---\n");
-            for (Cliente cliente : listaCliente) {
-                if (cliente.getIdade() >= 65) {
-                    System.out.println("Cliente prioritário: " + cliente.toString());
-                } else {
-                    System.out.println("Cliente nao prioritário: " + cliente.toString());
-
-                }
-            }
-            System.out.println("--- Fim da listagem ---\n");
-        }
-
-    }
-
-    /**
-     * Método que realiza o atendimento dos clientes prioritarios e exclui da lista depois de atender
-     */
-    public static void atenderClientePrioritario() {
-        if (listaCliente.isEmpty()) {
-            System.out.println("--- Não há clientes na fila ---\n");
-        } else {
-            for (int i = 0; i < listaCliente.size(); i++) {
-                if (listaCliente.get(i).getIdade() >= 65) {
-                    System.out.println("Cliente " + listaCliente.get(i).getNome() + " prioritário atendido.\n");
-                    listaCliente.remove(i);
-                }
-            }
-        }
-    }
-
-    /**
-     * Método que realiza o atendimento dos clientes nao prioritarios e exclui da lista depois de atender
-     */
-    public static void atenderClienteNaoPrioritario() {
-        if (listaCliente.isEmpty()) {
-            System.out.println("--- Não há clientes na fila ---\n");
-        } else {
-            for (int i = 0; i < listaCliente.size(); i++) {
-                if (listaCliente.get(i).getIdade() < 65) {
-                    System.out.println("Cliente " + listaCliente.get(i).getNome() + " nao prioritário atendido.\n");
-                    listaCliente.remove(i);
-                }
-            }
-        }
-    }
 
     /**
      * Método main que exibe um menu e demais ações do sistema
@@ -97,11 +26,14 @@ public class BancoApp {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Banco banco = new Banco();
+        Scanner sc = new Scanner(System.in);
         int opcao = 0;
+        
         do {
             System.out.println("1 - Adicionar cliente na fila");
-            System.out.println("2 - Atender clientes prioritarios");
-            System.out.println("3 - Atender clientes não prioritarios");
+            System.out.println("2 - Atender clientes");
+            //System.out.println("3 - Atender clientes não prioritarios");
             System.out.println("9 - Listar clientes");
             System.out.println("0 - Sair");
             System.out.println("---------");
@@ -110,16 +42,20 @@ public class BancoApp {
             System.out.print("---------\n\n");
             switch (opcao) {
                 case 1:
-                    adicionarClienteFila();
+                    System.out.println("Informe o nome: ");
+                    String nome = sc.next();
+                    System.out.println("Informe a idade: ");
+                    int idade = sc.nextInt();
+                    Cliente c = new Cliente(idade, nome, tempo);
+                    banco.adicionarClienteFila(c);
                     break;
                 case 2:
-                    atenderClientePrioritario();
-                    break;
-                case 3:
-                    atenderClienteNaoPrioritario();
+                    System.out.println("Informe o número do caixa:");
+                    int caixa = sc.nextInt();
+                    banco.atenderCliente(caixa);
                     break;
                 case 9:
-                    exibirClientes();
+                    banco.exibirClientes();
                     break;
                 case 0:
                     System.out.println("--- Fim da execução ---\n");
